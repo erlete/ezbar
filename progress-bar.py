@@ -158,6 +158,8 @@ class ProgressBar:
         elif self._progress > 1:
             return None
 
+        # Display settings:
+
         SYMBOL = '━'
         ICON = '√' if self._progress == 1 else '@'
         COLORS = {
@@ -173,30 +175,31 @@ class ProgressBar:
         else:
             cursor.hide()
 
-        # Progress bar display:
+        # Time computation:
 
         elapsed = perf_counter() - self._start
-
         eta = (elapsed / self._progress) * (1 - self._progress) + 1
+
         eta_format = f"{str(int(eta // 60)).zfill(2)}:{str(int(eta % 60)).zfill(2)}"
         percentage_format = f"{f'{percentage:.2f}'.rjust(6)} %"
 
+        # Progress bar display:
+
+        output = (
+            f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
+            f" {COLORS.get('progress')}{SYMBOL * bar_completed}"
+            f"{COLORS.get('remaining')}{SYMBOL * bar_remaining}"
+            f" {COLORS.get('text')}{f'[{percentage_format}]'}"
+        )
+
         if self._progress < 1:
             print(
-                f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
-                f" {COLORS.get('progress')}{SYMBOL * bar_completed}"
-                f"{COLORS.get('remaining')}{SYMBOL * bar_remaining}"
-                f" {COLORS.get('text')}{f'[{percentage_format}]'}"
-                f" {COLORS.get('text')}ETA: {eta_format}",
+                output + f" {COLORS.get('text')}ETA: {eta_format}",
                 end='\r'
             )
         else:
             print(
-                f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
-                f" {COLORS.get('progress')}{SYMBOL * bar_completed}"
-                f"{COLORS.get('remaining')}{SYMBOL * bar_remaining}"
-                f" {COLORS.get('text')}{f'[{percentage_format}]'}"
-                f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s",
+                output + f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s",
                 end='\n'
             )
 
