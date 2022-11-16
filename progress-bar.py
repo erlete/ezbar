@@ -39,7 +39,7 @@ class ProgressBar:
         self.text = text
         self.width = width
 
-        self._progress = 1e-12
+        self._progress = 0
 
     @property
     def total(self) -> int:
@@ -141,18 +141,20 @@ class ProgressBar:
         if self._start is None:
             self._start = perf_counter()
 
-        self._progress = (current ) / (self._total)  # Quick fix.
+        # Current progress definition and related parameters' adjustment:
 
-        percentage = round(self._progress * 100, 4)
-        completed = round(self._progress * self._width)
-        remaining = self._width - completed
+        self._progress = (current + 1) / (self._total)  # +1 to avoid 0%.
+
+        percentage = self._progress * 100
+        bar_completed = round(self._progress * self._width)  # int required.
+        bar_remaining = self._width - bar_completed
 
         # Value boundary adjustments:
 
-        percentage = percentage if percentage <= 100.00 else 100.00
+        percentage = percentage if percentage <= 100 else 100
 
         if self._progress < 0:
-            self._progress = 1e-12
+            self._progress = 0
         elif self._progress > 1:
             return None
 
@@ -182,8 +184,8 @@ class ProgressBar:
         if self._progress < 1:
             print(
                 f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
-                f" {COLORS.get('progress')}{SYMBOL * completed}"
-                f"{COLORS.get('remaining')}{SYMBOL * remaining}"
+                f" {COLORS.get('progress')}{SYMBOL * bar_completed}"
+                f"{COLORS.get('remaining')}{SYMBOL * bar_remaining}"
                 f" {COLORS.get('text')}{f'[{percentage_format}]'}"
                 f" {COLORS.get('text')}ETA: {eta_format}",
                 end='\r'
@@ -191,8 +193,8 @@ class ProgressBar:
         else:
             print(
                 f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
-                f" {COLORS.get('progress')}{SYMBOL * completed}"
-                f"{COLORS.get('remaining')}{SYMBOL * remaining}"
+                f" {COLORS.get('progress')}{SYMBOL * bar_completed}"
+                f"{COLORS.get('remaining')}{SYMBOL * bar_remaining}"
                 f" {COLORS.get('text')}{f'[{percentage_format}]'}"
                 f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s",
                 end='\n'
@@ -204,8 +206,8 @@ class ProgressBar:
 if __name__ == "__main__":
     from time import sleep
 
-    pb = ProgressBar(90, text="Progress")
+    pb = ProgressBar(101, text="Progress")
 
     for i in range(101):
         pb.update(i)
-        sleep(0.1)
+        sleep(0.05)
