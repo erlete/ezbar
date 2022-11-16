@@ -180,7 +180,8 @@ class ProgressBar:
         elapsed = perf_counter() - self._start
         eta = (elapsed / self._progress) * (1 - self._progress) + 1
 
-        eta_format = f"{str(int(eta // 60)).zfill(2)}:{str(int(eta % 60)).zfill(2)}"
+        eta_format = f"{str(int(eta // 60)).zfill(2)}:" \
+            + f"{str(int(eta % 60)).zfill(2)}"
         percentage_format = f"{f'{percentage:.2f}'.rjust(6)} %"
 
         # Progress bar display:
@@ -202,15 +203,3 @@ class ProgressBar:
                 output + f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s",
                 end='\n'
             )
-
-        self.LAST = perf_counter()
-
-
-if __name__ == "__main__":
-    from time import sleep
-
-    pb = ProgressBar(101, text="Progress")
-
-    for i in range(101):
-        pb.update(i)
-        sleep(0.05)
