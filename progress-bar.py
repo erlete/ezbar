@@ -1,7 +1,7 @@
 """Container module for the ProgressBar class.
 
 Author:
-    Carlos Puent: @carlospuenteg
+    Carlos Puente: @carlospuenteg
     Paulo Sanchez: @paulosanchez
 """
 
