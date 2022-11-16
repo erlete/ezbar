@@ -33,14 +33,95 @@ class ProgressBar:
     def __init__(self, total: int, text: str = "Progress",
                  width: int = None) -> None:
 
-        self.START = perf_counter()
-        self.END = None
-        self.TOTAL = total
+        self._start = perf_counter()
 
+        self.total = total
         self.text = text
-        self.width = width if width else 80 - (len(text) + 15)
+        self.width = width
 
-        self.progress = 1e-12
+        self._progress = 1e-12
+
+    @property
+    def total(self) -> int:
+        """Total amount of iterations of the loop.
+
+        Returns:
+            int: Total amount of iterations of the loop.
+        """
+
+        return self._total
+
+    @total.setter
+    def total(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise ValueError("Total iterations must be an integer.")
+
+        self._total = value
+
+    @property
+    def text(self) -> str:
+        """Text to be displayed before the progress bar.
+
+        Returns:
+            str: Text to be displayed before the progress bar.
+        """
+
+        return self._text
+
+    @text.setter
+    def text(self, value: str) -> None:
+        if not isinstance(value, str):
+            raise ValueError("Text must be a string.")
+
+        self._text = value
+
+    @property
+    def width(self) -> int:
+        """Width of the progress bar.
+
+        Returns:
+            int: Width of the progress bar.
+        """
+
+        return self._width
+
+    @width.setter
+    def width(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise ValueError("Width must be an integer.")
+
+        self._width = value if value else 80 - (len(self._text) + 15)
+
+    @property
+    def progress(self) -> float:
+        """Progress bar progress.
+
+        Returns:
+            float: Progress bar progress.
+        """
+
+        return self._progress
+
+    @property
+    def elapsed(self) -> float:
+        """Elapsed time at current status of the progress bar.
+
+        Returns:
+            float: Elapsed time at current status of the progress bar.
+        """
+
+        return perf_counter() - self._start
+
+    @property
+    def remaining(self) -> float:
+        """Remaining time until loop end.
+
+        Returns:
+            float: Remaining time until loop end.
+        """
+
+        return (perf_counter() - self._start) / self._progress \
+            * (1 - self._progress) + 1
 
     def update(self, current: int) -> None:
         """Progress bar update method.
@@ -52,47 +133,47 @@ class ProgressBar:
             current (int): Current iteration of the loop.
         """
 
-        self.progress = (current + 1) / (self.TOTAL - 1)  # Quick fix.
+        self._progress = (current + 1) / (self._total - 1)  # Quick fix.
 
-        percentage = round(self.progress * 100, 4)
-        completed = round(self.progress * self.width)
-        remaining = self.width - completed
+        percentage = round(self._progress * 100, 4)
+        completed = round(self._progress * self._width)
+        remaining = self._width - completed
 
         # Value boundary adjustments:
 
         percentage = percentage if percentage <= 100.00 else 100.00
 
-        if self.progress < 0:
-            self.progress = 1e-12
-        elif self.progress > 1:
+        if self._progress < 0:
+            self._progress = 1e-12
+        elif self._progress > 1:
             return None
 
         SYMBOL = '━'
-        ICON = '√' if self.progress == 1 else '@'
+        ICON = '√' if self._progress == 1 else '@'
         COLORS = {
-            "text": Fore.GREEN if self.progress == 1 else Fore.RED,
-            "progress": Fore.GREEN if self.progress == 1 else Fore.YELLOW,
+            "text": Fore.GREEN if self._progress == 1 else Fore.RED,
+            "progress": Fore.GREEN if self._progress == 1 else Fore.YELLOW,
             "remaining": Fore.BLACK
         }
 
         # Cursor display:
 
-        if self.progress == 1:
+        if self._progress == 1:
             cursor.show()
         else:
             cursor.hide()
 
         # Progress bar display:
 
-        elapsed = perf_counter() - self.START
+        elapsed = perf_counter() - self._start
 
-        eta = (elapsed / self.progress) * (1 - self.progress) + 1
+        eta = (elapsed / self._progress) * (1 - self._progress) + 1
         eta_format = f"{str(int(eta // 60)).zfill(2)}:{str(int(eta % 60)).zfill(2)}"
         percentage_format = f"{f'{percentage:.2f}'.rjust(6)} %"
 
-        if self.progress < 1:
+        if self._progress < 1:
             print(
-                f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self.text}"
+                f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
                 f" {COLORS.get('progress')}{SYMBOL * completed}"
                 f"{COLORS.get('remaining')}{SYMBOL * remaining}"
                 f" {COLORS.get('text')}{f'[{percentage_format}]'}"
@@ -101,7 +182,7 @@ class ProgressBar:
             )
         else:
             print(
-                f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self.text}"
+                f" {COLORS.get('text')}{ICON} {COLORS.get('text')}{self._text}"
                 f" {COLORS.get('progress')}{SYMBOL * completed}"
                 f"{COLORS.get('remaining')}{SYMBOL * remaining}"
                 f" {COLORS.get('text')}{f'[{percentage_format}]'}"
