@@ -203,3 +203,14 @@ class ProgressBar:
                 output + f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s",
                 end='\n'
             )
+
+if __name__ == "__main__":
+    from time import sleep
+
+    total = 100
+
+    bar = ProgressBar(total=total, text="Loading", width=30)
+
+    for i in range(total):
+        bar.update(i)
+        sleep(0.1)
