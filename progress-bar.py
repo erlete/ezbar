@@ -87,10 +87,13 @@ class ProgressBar:
 
     @width.setter
     def width(self, value: int) -> None:
-        if not isinstance(value, int):
+        if value is not None and not isinstance(value, int):
             raise ValueError("Width must be an integer.")
 
-        self._width = value if value else 80 - (len(self._text) + 15)
+        if value is None:
+            self._width = 80 - (len(self._text) + 15)
+        else:
+            self._width = value
 
     @property
     def progress(self) -> float:
@@ -138,7 +141,7 @@ class ProgressBar:
         if self._start is None:
             self._start = perf_counter()
 
-        self._progress = (current + 1) / (self._total - 1)  # Quick fix.
+        self._progress = (current ) / (self._total)  # Quick fix.
 
         percentage = round(self._progress * 100, 4)
         completed = round(self._progress * self._width)
