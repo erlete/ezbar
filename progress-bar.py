@@ -33,7 +33,7 @@ class ProgressBar:
     def __init__(self, total: int, text: str = "Progress",
                  width: int = None) -> None:
 
-        self._start = perf_counter()
+        self._start = None
 
         self.total = total
         self.text = text
@@ -132,6 +132,11 @@ class ProgressBar:
         Args:
             current (int): Current iteration of the loop.
         """
+
+        # Time counter start on first update:
+
+        if self._start is None:
+            self._start = perf_counter()
 
         self._progress = (current + 1) / (self._total - 1)  # Quick fix.
 
