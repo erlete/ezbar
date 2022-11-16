@@ -2,6 +2,8 @@
 
 A simple progress bar for loop progress measurement and time estimation.
 
+_The original idea and base script for this repository was created by @carlospuenteg. I just decided to refactor the code and add some nice features such as remaining and elapsed time counting._
+
 ## Features+
 
 * Simple and easy to use (create a progress bar and update it)
