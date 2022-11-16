@@ -1,3 +1,11 @@
+"""Container module for the ProgressBar class.
+
+Author:
+    Carlos Puent: @carlospuenteg
+    Paulo Sanchez: @paulosanchez
+"""
+
+
 from time import perf_counter
 
 import cursor
@@ -5,6 +13,22 @@ from colorama import Fore
 
 
 class ProgressBar:
+    """Progress bar generator class.
+
+    This class is used to generate a progress bar based on the total amount of
+    iterations of a given loop. It is updated using the current iteration
+    inside the loop (this can be done selectively).
+
+    It also provides with a timer to estimate the time remaining for the
+    completion of the loop and a final elapsed time display.
+
+    Args:
+        total (int): Total amount of iterations of the loop.
+        text (str, optional): Text to be displayed before the progress bar.
+            Defaults to "Progress".
+        width (int, optional): Width of the progress bar. Defaults to None.
+            If None, the width is set to 80 - (len(text) + 15).
+    """
 
     def __init__(self, total: int, text: str = "Progress",
                  width: int = None) -> None:
@@ -19,10 +43,13 @@ class ProgressBar:
         self.progress = 1e-12
 
     def update(self, current: int) -> None:
-        """_summary_
+        """Progress bar update method.
+
+        This method is used to update the progress bar based on the current
+        iteration of the loop.
 
         Args:
-            current (int): _description_
+            current (int): Current iteration of the loop.
         """
 
         self.progress = (current + 1) / (self.TOTAL - 1)  # Quick fix.
