@@ -30,14 +30,14 @@ py -m pip install ezbar
 Just import the `ProgressBar` class and it will be ready to go!
 
 ```python
-from ezbar import progress_bar.ProgressBar
+from ezbar.progress_bar import ProgressBar
 ```
 
 ## Example
 
 ```python
 from time import sleep
-from ezbar import progress_bar.ProgressBar
+from ezbar.progress_bar import ProgressBar
 
 ITERATIONS = 100
 
