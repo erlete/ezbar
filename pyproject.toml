@@ -1,0 +1,35 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "cursor>=1.3.5",
+    "colorama>=0.4.3"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simpleprogressbar"
+version = "0.1.0"
+authors = [
+    {
+        name="Paulo Sanchez",
+        email="dev.szblzpaulo@gmail.com"
+    }, {
+        name="Carlos Puente"
+        email="carlospuenteg@gmail.com"
+    }
+]
+description = "A simple progress bar for loop progress measurement and time estimation."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: User Interfaces",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/erlete/simple-progress-bar"
+"Bug Tracker" = "https://github.com/erlete/simple-progress-bar/issues"
