@@ -1,10 +1,10 @@
-# Progress Bar
+# EZ Bar
 
 A simple progress bar for loop progress measurement and time estimation.
 
 _The original idea and base script for this repository was created by @carlospuenteg. I just decided to refactor the code and add some nice features such as remaining and elapsed time counting._
 
-## Features+
+## Features
 
 * Simple and easy to use (create a progress bar and update it)
 * Colorful output so that you always see how your loop is progressing
@@ -16,11 +16,13 @@ _The original idea and base script for this repository was created by @carlospue
 ### macOS / UNIX
 
 ```bash
-# Clone the repository:
-git clone https://github.com/erlete/progress-bar
+python3 -m pip install ezbar
+```
 
-# Copy the `progress-bar.py` file to your project folder:
-cp progress-bar/progress-bar.py path/to/your/project/folder
+### Windows
+
+```cmd
+py -m pip install ezbar
 ```
 
 ## Usage
@@ -28,14 +30,14 @@ cp progress-bar/progress-bar.py path/to/your/project/folder
 Just import the `ProgressBar` class and it will be ready to go!
 
 ```python
-from progress_bar import ProgressBar
+from ezbar import progress_bar.ProgressBar
 ```
 
 ## Example
 
 ```python
 from time import sleep
-from progress_bar import ProgressBar
+from ezbar import progress_bar.ProgressBar
 
 ITERATIONS = 100
 
