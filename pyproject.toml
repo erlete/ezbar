@@ -8,14 +8,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "simpleprogressbar"
-version = "0.1.0"
+version = "1.1.0"
 authors = [
     {name = "Paulo Sanchez", email = "dev.szblzpaulo@gmail.com"},
     {name = "Carlos Puente", email = "carlospuenteg@gmail.com"}
 ]
 description = "A simple progress bar for loop progress measurement and time estimation."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.7"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
