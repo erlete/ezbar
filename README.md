@@ -13,6 +13,8 @@ _The original idea and base script for this repository was created by @carlospue
 
 ## Installation
 
+The installation of this module is performed via the Python Package Index (PyPI).
+
 ### macOS / UNIX
 
 ```bash
@@ -30,14 +32,14 @@ py -m pip install ezbar
 Just import the `ProgressBar` class and it will be ready to go!
 
 ```python
-from ezbar.progress_bar import ProgressBar
+from ezbar import ProgressBar
 ```
 
 ## Example
 
 ```python
 from time import sleep
-from ezbar.progress_bar import ProgressBar
+from ezbar import ProgressBar
 
 ITERATIONS = 100
 
