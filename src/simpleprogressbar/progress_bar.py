@@ -195,11 +195,13 @@ class ProgressBar:
 
         if self._progress < 1:
             print(
-                output + f" {COLORS.get('text')}ETA: {eta_format}",
+                output
+                + f" {COLORS.get('text')}ETA: {eta_format}{Fore.RESET}",
                 end='\r'
             )
         else:
             print(
-                output + f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s",
+                output
+                + f" {COLORS.get('text')}Elapsed: {elapsed:.2f}s{Fore.RESET}",
                 end='\n'
             )
