@@ -10,13 +10,8 @@ build-backend = "setuptools.build_meta"
 name = "simpleprogressbar"
 version = "0.1.0"
 authors = [
-    {
-        name="Paulo Sanchez",
-        email="dev.szblzpaulo@gmail.com"
-    }, {
-        name="Carlos Puente"
-        email="carlospuenteg@gmail.com"
-    }
+    {name = "Paulo Sanchez", email = "dev.szblzpaulo@gmail.com"},
+    {name = "Carlos Puente", email = "carlospuenteg@gmail.com"}
 ]
 description = "A simple progress bar for loop progress measurement and time estimation."
 readme = "README.md"
