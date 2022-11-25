@@ -1,6 +1,6 @@
 # EZ Bar
 
-[![PyPI release](https://github.com/erlete/ezbar/actions/workflows/python-publish.yml/badge.svg?branch=main)](https://github.com/erlete/ezbar/actions/workflows/python-publish.yml)
+[![PyPI release](https://github.com/erlete/ezbar/actions/workflows/python-publish.yml/badge.svg)](https://github.com/erlete/ezbar/actions/workflows/python-publish.yml)
 
 A simple progress bar for loop progress measurement and time estimation.
 
