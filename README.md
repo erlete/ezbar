@@ -11,7 +11,7 @@ _The original idea and base script for this repository was created by @carlospue
 * Estimated time of completion prediction. No need to stare at the screen for minutes!
 * Elapsed time display. Know the efficiency of your loops!
 
-https://user-images.githubusercontent.com/76848729/203904191-c975cd6f-94e9-4f93-820b-88c714252ccc.mp4
+https://user-images.githubusercontent.com/76848729/203905732-99d3c091-f375-499d-b990-0893130d106b.mp4
 
 ## Installation
 
