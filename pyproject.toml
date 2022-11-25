@@ -21,8 +21,10 @@ classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-    "Operating System :: OS Independent",
-    "Topic :: Software Development :: User Interfaces",
+    "Operating System :: MacOS",
+    "Operating System :: Unix",
+    "Operating System :: POSIX",
+    "Topic :: Software Development :: User Interfaces"
 ]
 
 [project.urls]
