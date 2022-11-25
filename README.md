@@ -25,9 +25,7 @@ python3 -m pip install ezbar
 
 ### Windows
 
-```cmd
-py -m pip install ezbar
-```
+*This operating system is not supported yet.*
 
 ## Usage
 
